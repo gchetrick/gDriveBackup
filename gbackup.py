@@ -86,18 +86,24 @@ for opt,toss in opts:
                         drive_service = build('drive', 'v2', http=http)
                         # Insert a file
                         for arg in sys.argv[2:]:
-                                print arg
+                                filename = os.path.basename(arg)
                                 format,encoding = mimetypes.guess_type(arg)
-                                print format
+                                if format is None:
+                                        format = 'application/zip'
                                 media_body = MediaFileUpload(arg, mimetype=format, resumable=True)
                                 body = {
-                                        'title': arg,
+                                        'title': filename,
                                         'description': 'Backupfile from gbackup.py',
                                         'mimeType': format
                                 }
-                                file = drive_service.files().insert(body=body, media_body=media_body).execute()
-
-                        sys.exit()
+                                #file = drive_service.files().insert(body=body, media_body=media_body).execute()
+                                file = drive_service.files().insert(body=body, media_body=media_body)
+                                response = None
+                                while response is None:
+                                        status, response = file.next_chunk()
+                                        if status:
+                                                print "Uploaded %d%%." % int(status.progress() *100)
+                                print "Upload Complete!"
         elif opt in ("-i", "--init"):
                 flow = OAuth2WebServerFlow(CLIENT_ID, CLIENT_SECRET, OAUTH_SCOPE, REDIRECT_URI)
                 authorize_url = flow.step1_get_authorize_url()
