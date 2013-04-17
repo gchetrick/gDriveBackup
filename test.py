@@ -7,7 +7,6 @@ from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
 
-
 # Copy your credentials from the APIs Console
 CLIENT_ID = '303911097105.apps.googleusercontent.com'
 CLIENT_SECRET = 'GWLv1F-cFwDn4PxOQnY9v1mL'
@@ -27,7 +26,6 @@ authorize_url = flow.step1_get_authorize_url()
 print 'Go to the following link in your browser: ' + authorize_url
 code = raw_input('Enter verification code: ').strip()
 credentials = flow.step2_exchange(code)
-print 
 
 # Create an httplib2.Http object and authorize it with our credentials
 http = httplib2.Http()
