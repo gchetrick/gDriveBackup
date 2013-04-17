@@ -23,6 +23,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+Libraries required for this to work
+httplib2
+google-api-python-client
+
+with setuptools you can do this
+easy_install httplib2
+easy_install google-api-python-client
+
 Usage: gbackup.py [options]
 
 Options:
