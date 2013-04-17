@@ -5,8 +5,9 @@ Used Google Drive API to push backup files to Google Drive.
 
 
 gbackup.py v 0.1
-Author Greg Hetrick
-greghetrick@gmail.com
+Author: Greg Hetrick
+Email: greghetrick@gmail.com
+
 Released under the GPL license.
 
 This program is free software: you can redistribute it and/or modify
