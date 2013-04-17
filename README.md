@@ -21,3 +21,16 @@ Used Google Drive API to push backup files to Google Drive.
 #
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+Usage: gbackup.py [options]
+
+Options:
+
+-h,--help               Show this help menu and exit
+-i, --init              Initalize the access with Google for this script and the users account.
+                        Only needs to be run once, unless access is revoked.
+                        First time this is run copy the printed URL from the command line to a browser and
+                        allow access for the script. Copy the code presented back to the commandline
+
+-f,--file filename(s)   This can be a space delimited list: file1.txt file2.txt file3.txt - Or it can be *
+
