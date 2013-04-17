@@ -4,10 +4,13 @@ import httplib2
 import pprint
 import os
 import sys, getopt
+import logging
 
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
 from oauth2client.client import OAuth2WebServerFlow
+from oauth2client.client import FlowExchangeError
+from apiclient import errors
 
 CLIENT_ID = '303911097105.apps.googleusercontent.com'
 CLIENT_SECRET = 'GWLv1F-cFwDn4PxOQnY9v1mL'
@@ -60,22 +63,26 @@ for opt, arg in opts:
 		authorize_url = flow.step1_get_authorize_url()
 		print 'Go to the following link in your browser: \n' + authorize_url
 		code = raw_input('Enter verification code: ').strip()
-		user_info_service = build(
-      			serviceName='oauth2', version='v2',
-      			http=credentials.authorize(httplib2.Http()))
-  		user_info = None
- 		try:
-    			user_info = user_info_service.userinfo().get().execute()
-  		except errors.HttpError, e:
-    			logging.error('An error occurred: %s', e)
-  		if user_info and user_info.get('id'):
-    			ident = user_info.get('id')
-			print "IDENTITY" + ident
-  		else:
-    			raise NoUserIdException()
+		credentials = flow.step2_exchange(code)
+		http = httplib2.Http()
+		http = credentials.authorize(http)
+		#print "CREDS" + credentials
+		#user_info_service = build('oauth2', 'v2', http=http)
+      			#http=code.authorize(httplib2.Http()))
+  		#user_info = None
+ 		#try:
+    		#	user_info = user_info_service.userinfo().get().execute()
+  		#except errors.HttpError, e:
+    		#	logging.error('An error occurred: %s', e)
+  		#if user_info and user_info.get('id'):
+    		#	ident = user_info.get('id')
+		#	print "IDENTITY" + ident
+  		#else:
+    		#	#raise NoUserIdException()
+		#	print "NO USER ID"
 
 		file = open(credfile, "w")
-		file.write(code);		
+		file.write(credentials.refresh_token);		
 		file.close()
 		sys.exit()
 	else: 
