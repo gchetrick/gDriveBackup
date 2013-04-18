@@ -31,7 +31,7 @@ from oauth2client.client import FlowExchangeError
 from apiclient import errors
 from oauth2client.file import Storage
 
-OAUTH_SCOPE = 'https://www.googleapis.com/auth/drive'
+OAUTH_SCOPE = 'https://www.googleapis.com/auth/drive.file'
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
 
 USAGE = """
