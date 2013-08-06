@@ -37,7 +37,7 @@ Options:
 
 -h,--help               Show this help menu and exit
 -i, --init              Initalize the access with Google for this script and the users account.
-                        Only needs to be run once, unless access is revoked.
+                        Only needs to be run once, unless access is revoked. Must run as root (working on it)
                         First time this is run copy the printed URL from the command line to a browser and
                         allow access for the script. Copy the code presented back to the commandline
 

@@ -1,0 +1,16 @@
+To create a client ID and client secret, create a Google APIs Console project, enable the Google+ API, and register your JavaScript origins:
+
+In the Google APIs Console , select Create from the pull-down menu on the left, and enter a project name (such as "Sample").
+In the Services pane, enable the Google+ API and any other APIs that your app requires.
+In the API Access pane, click Create an OAuth 2.0 Client ID.
+In the Product name field, enter a name for your application (such as "Sample"), and click Next. Providing a product logo is optional.
+In the Client ID Settings section, do the following:
+Select Web application for the Application type.
+Click the more options link.
+In the Authorized Redirect URIs field, delete the example URI.
+In the Authorized JavaScript Origins field, add the first of the following URLs for development. The last two are examples of production URLs.
+http://localhost:8080
+http://mysite.example.com
+https://mysite.example.com
+Click the Create client ID button.
+In the API Access pane, locate the section Client ID for web applications and note or copy the Client ID and Client secret that you will need later to run the sample:

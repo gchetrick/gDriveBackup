@@ -23,6 +23,7 @@ import pprint
 import os
 import sys, getopt
 import mimetypes
+import logging
 
 from apiclient.discovery import build
 from apiclient.http import MediaFileUpload
@@ -41,7 +42,7 @@ Options:
 
 -h,--help               Show this help menu and exit
 -i, --init              Initalize the access with Google for this script and the users account.
-                        Only needs to be run once, unless access is revoked.
+                        Only needs to be run once, unless access is revoked. Must run as root
                         First time this is run copy the printed URL from the command line to a browser and
                         allow access for the script. Copy the code presented back to the commandline
 
