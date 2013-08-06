@@ -34,6 +34,7 @@ from oauth2client.file import Storage
 
 OAUTH_SCOPE = 'https://www.googleapis.com/auth/drive.file'
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
+os.environ['REQUESTS_CA_BUNDLE'] = '/home/ghetrick/cacert.pem'
 
 USAGE = """
 Usage: gbackup.py [options]
@@ -104,11 +105,12 @@ for opt,toss in opts:
                                                 print "Uploaded %d%%." % int(status.progress() *100)
                                 print filename + " - Upload Complete!"
         elif opt in ("-i", "--init"):
+		httpfix = httplib2.Http(disable_ssl_certificate_validation=True)
                 flow = flow_from_clientsecrets('client_secrets.json', OAUTH_SCOPE, REDIRECT_URI)
                 authorize_url = flow.step1_get_authorize_url()
                 print 'Go to the following link in your browser: \n' + authorize_url
                 code = raw_input('Enter verification code: ').strip()
-                credentials = flow.step2_exchange(code)
+                credentials = flow.step2_exchange(code,httpfix)
                 storage = Storage(credfile)
                 storage.put(credentials)
                 print "All finished initializing, run again using -f or --file to upload a file."
